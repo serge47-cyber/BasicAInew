@@ -125,10 +125,10 @@ html.light .text-slate-360 {
 
 html.light h1.text-white,
 html.light h2.text-white,
-html.light h3.text-white:not(button *):not([class*="bg-vibrant-"] *),
-html.light h4.text-white:not(button *):not([class*="bg-vibrant-"] *),
-html.light p.text-white:not(button *):not([class*="bg-vibrant-"] *),
-html.light span.text-white:not(button *):not([class*="bg-vibrant-"] *):not(header *),
+html.light h3.text-white:not(button *):not([class*="bg-vibrant-pink"] *):not([class*="bg-vibrant-purple"] *):not([class*="bg-vibrant-violet"] *):not([class*="bg-vibrant-indigo"] *):not([class*="bg-vibrant-emerald"] *):not([class*="bg-vibrant-coral"] *),
+html.light h4.text-white:not(button *):not([class*="bg-vibrant-pink"] *):not([class*="bg-vibrant-purple"] *):not([class*="bg-vibrant-violet"] *):not([class*="bg-vibrant-indigo"] *):not([class*="bg-vibrant-emerald"] *):not([class*="bg-vibrant-coral"] *),
+html.light p.text-white:not(button *):not([class*="bg-vibrant-pink"] *):not([class*="bg-vibrant-purple"] *):not([class*="bg-vibrant-violet"] *):not([class*="bg-vibrant-indigo"] *):not([class*="bg-vibrant-emerald"] *):not([class*="bg-vibrant-coral"] *),
+html.light span.text-white:not(button *):not(header *):not([class*="bg-vibrant-pink"] *):not([class*="bg-vibrant-purple"] *):not([class*="bg-vibrant-violet"] *):not([class*="bg-vibrant-indigo"] *):not([class*="bg-vibrant-emerald"] *):not([class*="bg-vibrant-coral"] *),
 html.light strong.text-white {
   color: #0f172a !important;
 }
