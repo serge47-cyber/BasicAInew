@@ -365,21 +365,87 @@ html.light .bg-rose-950\/10 * {
 /* Alert text states specifically */
 html.light .text-emerald-300,
 html.light .text-emerald-200,
-html.light .text-emerald-100 {
+html.light .text-emerald-100,
+html.light [class*="text-emerald-200"] {
   color: #15803d !important;
 }
 
 html.light .text-rose-300,
 html.light .text-coral-200,
-html.light .text-coral-100 {
+html.light .text-coral-100,
+html.light [class*="text-coral-100"],
+html.light [class*="text-coral-200"] {
   color: #b91c1c !important;
 }
 
 html.light .text-cyan-200,
 html.light .text-cyan-100,
 html.light .text-sky-200,
-html.light .text-sky-100 {
+html.light .text-sky-100,
+html.light [class*="text-cyan-200"] {
   color: #0369a1 !important;
+}
+
+/* Specific overrides for vibrant color background boxes (methodology alerts, comments) in Light Mode */
+html.light .bg-vibrant-cyan\/10 {
+  background-color: #f0f9ff !important; /* Soft light blue/cyan */
+  border-color: #bae6fd !important;
+  color: #0369a1 !important;
+}
+html.light .bg-vibrant-cyan\/10 * {
+  color: #0369a1 !important;
+}
+html.light .bg-vibrant-cyan\/10 span[class*="text-vibrant-pink"] {
+  color: #ec4899 !important; /* Keep the bold pink label bright and beautiful on light backgrounds */
+}
+html.light .bg-vibrant-cyan\/10 span[class*="text-vibrant-cyan"] {
+  color: #0284c7 !important; /* Make label visible */
+}
+
+html.light .bg-vibrant-emerald\/10 {
+  background-color: #f0fdf4 !important; /* Soft light green */
+  border-color: #bbf7d0 !important;
+  color: #15803d !important;
+}
+html.light .bg-vibrant-emerald\/10 * {
+  color: #15803d !important;
+}
+html.light .bg-vibrant-emerald\/10 span[class*="text-vibrant-pink"] {
+  color: #ec4899 !important; /* Keep the label bright and beautiful */
+}
+
+html.light .bg-vibrant-coral\/10 {
+  background-color: #fef2f2 !important; /* Soft light coral/red */
+  border-color: #fecaca !important;
+  color: #b91c1c !important;
+}
+html.light .bg-vibrant-coral\/10 * {
+  color: #b91c1c !important;
+}
+html.light .bg-vibrant-coral\/10 span[class*="text-vibrant-pink"] {
+  color: #ec4899 !important; /* Keep the label bright and beautiful */
+}
+
+/* Selected options / highlights in Light Mode */
+html.light .bg-vibrant-cyan\/15 {
+  background-color: #e0f2fe !important;
+  border-color: #0284c7 !important;
+  color: #0369a1 !important;
+}
+html.light .bg-vibrant-emerald\/15 {
+  background-color: #d1fae5 !important;
+  border-color: #059669 !important;
+  color: #065f46 !important;
+}
+html.light .bg-vibrant-coral\/15 {
+  background-color: #fee2e2 !important;
+  border-color: #dc2626 !important;
+  color: #991b1b !important;
+}
+
+/* Label text corrections */
+html.light .text-vibrant-pink {
+  color: #c026d3 !important; /* Slightly deeper readable magenta/pink in light mode */
 }
 
 /* Slider / Range controls in light theme */
