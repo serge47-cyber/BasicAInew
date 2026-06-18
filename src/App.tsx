@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { 
   BookOpen, CheckCircle, GraduationCap, Award, Compass, 
-  Sparkles, Shield, User, HelpCircle, Layers, Moon, 
+  Sparkles, Shield, User, HelpCircle, Layers, Moon, Sun, 
   Menu, X, ChevronRight, ChevronLeft, Type, Copy, 
   Check, Play, ArrowLeft, Heart, Zap, Globe, Sparkle
 } from 'lucide-react';
@@ -51,6 +51,30 @@ export default function App() {
     const saved = localStorage.getItem('basicai_text_size');
     return saved === 'large' ? 'large' : 'normal';
   });
+
+  // Світла/темна тема (за замовчуванням світла)
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    const saved = localStorage.getItem('basicai_theme');
+    return saved === 'dark' ? 'dark' : 'light';
+  });
+
+  useEffect(() => {
+    if (theme === 'light') {
+      document.documentElement.classList.add('light');
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('basicai_theme', 'light');
+    } else {
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+      localStorage.setItem('basicai_theme', 'dark');
+    }
+  }, [theme]);
+
+  const toggleTheme = () => {
+    const next = theme === 'light' ? 'dark' : 'light';
+    setTheme(next);
+    showToast(`Тему змінено на: ${next === 'light' ? 'Світлу ☀️' : 'Темну 🌙'}`, 'info');
+  };
 
   // Тости
   const [toasts, setToasts] = useState<{ id: string; text: string; type: 'success' | 'error' | 'info' }[]>([]);
@@ -323,6 +347,18 @@ export default function App() {
             >
               <Type className="w-4 h-4" />
               <span className="hidden sm:inline text-xs font-bold font-display">Aa</span>
+            </button>
+
+            <button 
+              onClick={toggleTheme}
+              className="p-2 rounded-xl transition-all border flex items-center justify-center active:scale-95 cursor-pointer bg-vibrant-card border-vibrant-border text-slate-400 hover:text-white hover:border-slate-600"
+              title="Перемкнути світлу/темну тему"
+            >
+              {theme === 'light' ? (
+                <Moon className="w-4 h-4 text-vibrant-violet" />
+              ) : (
+                <Sun className="w-4 h-4 text-vibrant-amber" />
+              )}
             </button>
 
             {userRole && (

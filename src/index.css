@@ -6,7 +6,24 @@
   --font-display: "Outfit", sans-serif;
   --font-mono: "Fira Code", monospace;
 
-  /* Custom Neon/Vibrant Colors */
+  /* default light theme colors */
+  --color-vibrant-pink: #d946ef;
+  --color-vibrant-purple: #8b5cf6;
+  --color-vibrant-violet: #6d28d9;
+  --color-vibrant-indigo: #2563eb;
+  --color-vibrant-cyan: #0891b2;
+  --color-vibrant-emerald: #059669;
+  --color-vibrant-amber: #d97706;
+  --color-vibrant-coral: #dc2626;
+  --color-vibrant-dark: #f8fafc;
+  --color-vibrant-card: #ffffff;
+  --color-vibrant-card-hover: #f1f5f9;
+  --color-vibrant-border: #cbd5e1;
+  --color-vibrant-border-active: #8b5cf6;
+}
+
+/* Dark Theme Variables */
+.dark {
   --color-vibrant-pink: #ff1493;
   --color-vibrant-purple: #9d4edd;
   --color-vibrant-violet: #7b2cbf;
@@ -25,30 +42,150 @@
 /* Base custom classes to match the Vibrant Palette theme */
 body {
   background-color: var(--color-vibrant-dark);
-  color: #f1f3f9;
+  color: #1e293b;
   font-family: var(--font-sans);
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(139, 92, 246, 0.05) 0%, transparent 45%),
+    radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.05) 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(217, 70, 239, 0.02) 0%, transparent 50%);
+  background-attachment: fixed;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.dark body {
+  background-color: var(--color-vibrant-dark);
+  color: #f1f3f9;
   background-image: 
     radial-gradient(circle at 10% 20%, rgba(123, 44, 191, 0.12) 0%, transparent 40%),
     radial-gradient(circle at 90% 80%, rgba(76, 201, 240, 0.1) 0%, transparent 50%),
     radial-gradient(circle at 50% 50%, rgba(255, 20, 147, 0.05) 0%, transparent 60%);
-  background-attachment: fixed;
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbar - Light */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #0a0915;
+  background: #f1f5f9;
 }
 ::-webkit-scrollbar-thumb {
-  background: #2d2a55;
+  background: #cbd5e1;
   border-radius: 9999px;
-  border: 2px solid #0a0915;
+  border: 2px solid #f1f5f9;
 }
 ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Custom Scrollbar - Dark */
+.dark ::-webkit-scrollbar-track {
+  background: #0a0915;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #2d2a55;
+  border: 2px solid #0a0915;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
   background: #7b2cbf;
+}
+
+/* Text glow adjustments */
+.text-glow-pink {
+  text-shadow: 0 0 12px rgba(217, 70, 239, 0.2);
+}
+.text-glow-cyan {
+  text-shadow: 0 0 12px rgba(8, 145, 178, 0.2);
+}
+.text-glow-amber {
+  text-shadow: 0 0 12px rgba(217, 119, 6, 0.2);
+}
+
+.dark .text-glow-pink {
+  text-shadow: 0 0 12px rgba(255, 20, 147, 0.4);
+}
+.dark .text-glow-cyan {
+  text-shadow: 0 0 12px rgba(76, 201, 240, 0.4);
+}
+.dark .text-glow-amber {
+  text-shadow: 0 0 12px rgba(255, 183, 3, 0.4);
+}
+
+/* Base Light Text Corrections (High-Contrast Legibility) */
+html.light .text-slate-50,
+html.light .text-slate-100,
+html.light .text-slate-200,
+html.light .text-slate-205,
+html.light .text-slate-250,
+html.light .text-slate-300 {
+  color: #1e293b !important;
+}
+
+html.light .text-slate-350,
+html.light .text-slate-400,
+html.light .text-slate-450 {
+  color: #475569 !important;
+}
+
+html.light .text-slate-500 {
+  color: #64748b !important;
+}
+
+/* Ensure background filters remain light/dark appropriate */
+html.light .bg-vibrant-dark\/30 {
+  background-color: rgba(241, 245, 249, 0.6) !important;
+}
+html.light .bg-vibrant-dark\/50 {
+  background-color: rgba(226, 232, 240, 0.5) !important;
+}
+html.light .bg-vibrant-dark\/65 {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+}
+html.light .bg-vibrant-dark\/85 {
+  background-color: rgba(248, 250, 252, 0.9) !important;
+}
+html.light .bg-vibrant-dark\/35 {
+  background-color: rgba(241, 245, 249, 0.8) !important;
+}
+
+/* Opacity overrides for card look */
+html.light .bg-vibrant-card\/65 {
+  background-color: rgba(255, 255, 255, 0.75) !important;
+}
+html.light .bg-vibrant-card\/90 {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+}
+html.light .border-vibrant-border\/60 {
+  border-color: rgba(203, 213, 225, 0.6) !important;
+}
+html.light .border-vibrant-border\/50 {
+  border-color: rgba(203, 213, 225, 0.5) !important;
+}
+html.light .border-vibrant-border\/30 {
+  border-color: rgba(203, 213, 225, 0.3) !important;
+}
+
+/* Accent borders */
+.vibrant-card-gradient {
+  background: linear-gradient(135deg, rgba(20, 18, 38, 0.9) 0%, rgba(13, 11, 26, 0.95) 100%);
+  border: 1.5px solid var(--color-vibrant-border);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
+.vibrant-card-gradient:hover {
+  border-color: rgba(157, 78, 221, 0.5);
+  box-shadow: 0 15px 35px -8px rgba(123, 44, 191, 0.15), 0 0 15px rgba(76, 201, 240, 0.05);
+}
+
+html.light .vibrant-card-gradient {
+  background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%) !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.05) !important;
+}
+
+html.light .vibrant-card-gradient:hover {
+  border-color: #a78bfa !important;
+  box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 10px 10px -5px rgba(15, 23, 42, 0.04) !important;
 }
 
 /* Animations */
@@ -98,29 +235,4 @@ body {
 
 .animate-wiggle:hover {
   animation: wiggle 0.4s ease-in-out infinite;
-}
-
-/* Accent borders */
-.vibrant-card-gradient {
-  background: linear-gradient(135deg, rgba(20, 18, 38, 0.9) 0%, rgba(13, 11, 26, 0.95) 100%);
-  border: 1.5px solid var(--color-vibrant-border);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-}
-
-.vibrant-card-gradient:hover {
-  border-color: rgba(157, 78, 221, 0.5);
-  box-shadow: 0 15px 35px -8px rgba(123, 44, 191, 0.15), 0 0 15px rgba(76, 201, 240, 0.05);
-}
-
-/* Text glow */
-.text-glow-pink {
-  text-shadow: 0 0 12px rgba(255, 20, 147, 0.4);
-}
-
-.text-glow-cyan {
-  text-shadow: 0 0 12px rgba(76, 201, 240, 0.4);
-}
-
-.text-glow-amber {
-  text-shadow: 0 0 12px rgba(255, 183, 3, 0.4);
 }
