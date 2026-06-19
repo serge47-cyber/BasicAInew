@@ -7,9 +7,13 @@ import {
 } from 'lucide-react';
 import { syllabusList, detailedLessons, allLessons } from './lessonsData';
 import { PlaygroundWidget } from './components/PlaygroundWidget';
+import { GlossaryModal } from './components/GlossaryModal';
 import { RoleType, RouteMode, FullLesson } from './types';
 
 export default function App() {
+  // Стан модального вікна глосарію термінів
+  const [isGlossaryOpen, setIsGlossaryOpen] = useState<boolean>(false);
+
   // Користувацький шлях
   const [userRole, setUserRole] = useState<RoleType | null>(() => {
     const saved = localStorage.getItem('basicai_user_role');
@@ -361,6 +365,16 @@ export default function App() {
               )}
             </button>
 
+            <button 
+              onClick={() => setIsGlossaryOpen(true)}
+              className="p-2 rounded-xl transition-all border flex items-center gap-1.5 active:scale-95 cursor-pointer bg-vibrant-card border-vibrant-border text-slate-400 hover:text-white hover:border-slate-600"
+              title="Відкрити глосарій термінів ШІ"
+              id="header_glossary_trigger"
+            >
+              <BookOpen className="w-4 h-4 text-vibrant-pink" />
+              <span className="hidden lg:inline text-xs font-bold font-display">Глосарій</span>
+            </button>
+
             {userRole && (
               <div className={`hidden md:flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[10px] font-black uppercase border tracking-wider ${
                 userRole === 'curious' 
@@ -516,6 +530,32 @@ export default function App() {
                     {userRole === 'curious' ? 'Допитливий ☀️' : 'Бізнес 💼'}
                   </span>
                 </div>
+              </div>
+
+              {/* Glossary Promo Banner */}
+              <div 
+                id="glossary-promo-card"
+                onClick={() => setIsGlossaryOpen(true)}
+                className="group relative overflow-hidden rounded-2xl border border-vibrant-border p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-gradient-to-r from-vibrant-pink/10 via-vibrant-purple/5 to-transparent hover:border-vibrant-pink/50 cursor-pointer transition-all duration-300"
+              >
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-vibrant-pink/15 flex items-center justify-center text-vibrant-pink border border-vibrant-pink/25 group-hover:scale-105 transition-transform shrink-0">
+                    <BookOpen className="w-6 h-6 text-glow-pink" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-display font-black text-white group-hover:text-vibrant-pink transition-colors">📖 Інтерактивний глосарій термінів ШІ</h3>
+                    <p className="text-slate-350 text-xs mt-1">
+                      Промпт, галюцинація, контекст, нейромережа... Дізнайтеся та закріпіть прості життєві аналогії для найскладніших понять за один клік!
+                    </p>
+                  </div>
+                </div>
+                <button 
+                  id="dashboard-open-glossary-btn"
+                  className="px-4 py-2 bg-vibrant-dark group-hover:bg-vibrant-pink group-hover:text-slate-950 border border-vibrant-border group-hover:border-transparent text-[11px] font-black uppercase text-vibrant-pink rounded-xl shadow-lg transition-all active:scale-95 shrink-0 self-stretch sm:self-center flex items-center justify-center gap-1.5 font-display tracking-wider"
+                >
+                  <span>Відкрити словник</span>
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
               </div>
 
               {/* Route Mode Switcher & Progress bar combined */}
@@ -1819,6 +1859,9 @@ export default function App() {
 
         </main>
       </div>
+
+      {/* Glossary Modal Overlay */}
+      <GlossaryModal isOpen={isGlossaryOpen} onClose={() => setIsGlossaryOpen(false)} />
 
       {/* Success Celebration modal overlay on finishing Lesson */}
       {showCelebration && (
