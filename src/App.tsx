@@ -3,7 +3,7 @@ import {
   BookOpen, CheckCircle, GraduationCap, Award, Compass, 
   Sparkles, Shield, User, HelpCircle, Layers, Moon, Sun, 
   Menu, X, ChevronRight, ChevronLeft, Type, Copy, 
-  Check, Play, ArrowLeft, Heart, Zap, Globe, Sparkle
+  Check, Play, ArrowLeft, Heart, Zap, Globe, Sparkle, Share2
 } from 'lucide-react';
 import { syllabusList, detailedLessons, allLessons } from './lessonsData';
 import { PlaygroundWidget } from './components/PlaygroundWidget';
@@ -13,6 +13,32 @@ import { RoleType, RouteMode, FullLesson } from './types';
 export default function App() {
   // Стан модального вікна глосарію термінів
   const [isGlossaryOpen, setIsGlossaryOpen] = useState<boolean>(false);
+
+  // Стан для копіювання посилання "Поділитися"
+  const [isShared, setIsShared] = useState<boolean>(false);
+
+  const handleShare = () => {
+    const url = window.location.origin + window.location.pathname;
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(() => {
+          setIsShared(true);
+          setTimeout(() => setIsShared(false), 2000);
+        });
+      } else {
+        const tempInput = document.createElement('input');
+        tempInput.value = url;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+        setIsShared(true);
+        setTimeout(() => setIsShared(false), 2000);
+      }
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  };
 
   // Користувацький шлях
   const [userRole, setUserRole] = useState<RoleType | null>(() => {
@@ -373,6 +399,29 @@ export default function App() {
             >
               <BookOpen className="w-4 h-4 text-vibrant-pink" />
               <span className="hidden lg:inline text-xs font-bold font-display">Глосарій</span>
+            </button>
+
+            <button 
+              onClick={handleShare}
+              className={`p-2 rounded-xl transition-all border flex items-center gap-1.5 active:scale-95 cursor-pointer ${
+                isShared 
+                  ? 'bg-vibrant-emerald/15 border-vibrant-emerald/30 text-vibrant-emerald' 
+                  : 'bg-vibrant-card border-vibrant-border text-slate-400 hover:text-white hover:border-slate-600'
+              }`}
+              title="Скопіювати посилання на цей посібник"
+              id="header_share_trigger"
+            >
+              {isShared ? (
+                <>
+                  <Check className="w-4 h-4 text-vibrant-emerald" />
+                  <span className="hidden sm:inline text-xs font-bold font-display">Скопійовано!</span>
+                </>
+              ) : (
+                <>
+                  <Share2 className="w-4 h-4 text-vibrant-purple" />
+                  <span className="hidden sm:inline text-xs font-bold font-display">Поділитися</span>
+                </>
+              )}
             </button>
 
             {userRole && (
